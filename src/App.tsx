@@ -209,7 +209,8 @@ const MEDICAL_PROGRAMS = [
     nameEn: "Digestive System Precision Examination",
     duration: "2 Days & 1 Night",
     room: "Single VIP Hospital Room Included (1인 전용 병동 포함)",
-    price: "USD 1,200",
+    priceKo: "비용 : 별도문의",
+    priceEn: "Price: Upon Request",
     detailsKo: "위, 식도, 십이지장 궤양, 위암 등 정밀 안심 위 조영 촬영 및 수면 위내시경 진단 패키지.",
     detailsEn: "Gastroscopy (Sleep type, sedation), comprehensive stomach, esophagus, duodenal ulcer, and stomach cancer screening."
   },
@@ -218,7 +219,8 @@ const MEDICAL_PROGRAMS = [
     nameEn: "Heart Precision Examination A",
     duration: "2 Days & 1 Night",
     room: "Single VIP Hospital Room Included (1인 전용 병동 포함)",
-    price: "USD 1,600",
+    priceKo: "비용 : 별도문의",
+    priceEn: "Price: Upon Request",
     detailsKo: "심장초음파, 경동맥초음파, 심혈관 석회화도 CT 촬영 등으로 허혈성 심혈관 질환 위험 조기 규격 예측.",
     detailsEn: "Echocardiogram, Carotid ultrasound, Calcium scoring CT. Evaluate cardiovascular disease risk factor and atherosclerosis."
   },
@@ -227,7 +229,8 @@ const MEDICAL_PROGRAMS = [
     nameEn: "Heart Precision Examination B",
     duration: "2 Days & 1 Night",
     room: "Single VIP Hospital Room Included (1인 전용 병동 포함)",
-    price: "USD 2,000",
+    priceKo: "비용 : 별도문의",
+    priceEn: "Price: Upon Request",
     detailsKo: "심장 조영 CT 및 심혈관 조영술 연계. 비침습적 관상동맥 협착 및 심장 기능 정밀 판독 프로그램.",
     detailsEn: "Cardiac CT Angiography. Non-invasive evaluation of heart & coronary artery stenosis and cardiac function."
   },
@@ -236,7 +239,8 @@ const MEDICAL_PROGRAMS = [
     nameEn: "Brain Precision Examination",
     duration: "2 Days & 1 Night",
     room: "Single VIP Hospital Room Included (1인 전용 병동 포함)",
-    price: "USD 1,600",
+    priceKo: "비용 : 별도문의",
+    priceEn: "Price: Upon Request",
     detailsKo: "뇌 MRI 및 경동맥 초음파 포함. 뇌종양, 뇌경색, 뇌출혈, 알츠하이머 위험 요인의 조기 신경 정밀 진단.",
     detailsEn: "Brain MRI, Carotid ultrasound. Diagnose/prevent brain tumor, cerebral hemorrhage, and carotid arterial diseases."
   },
@@ -245,7 +249,8 @@ const MEDICAL_PROGRAMS = [
     nameEn: "Cancer Precision Examination",
     duration: "2 Days & 1 Night",
     room: "Single VIP Hospital Room Included (1인 전용 병동 포함)",
-    price: "USD 2,000",
+    priceKo: "비용 : 별도문의",
+    priceEn: "Price: Upon Request",
     detailsKo: "수면 위/대장 내시경 검사, 복부 정밀 MRI, 핵심 종양 마커 진단으로 인체 필수 암 완벽 스크리닝.",
     detailsEn: "Brain MRI, Gastroscopy, Sleep endoscopy, multi-screening for key oncology pathways & tumor marker checks."
   }
@@ -255,7 +260,8 @@ const BEAUTY_COURSES = [
   {
     nameKo: "베이직 동안 쁘띠 케어 (Basic Course)",
     nameEn: "Basic Wellness Course",
-    price: "USD 450 ~ 620",
+    priceKo: "비용 : 별도문의",
+    priceEn: "Price: Upon Request",
     scheduleKo: [
       "1일차: 침샘/사각턱 보톡스 + 슈링크 300샷 + 인모드 FX (얼굴 윤곽 축소 시술)",
       "2일차: 리쥬란 힐러 2cc + 플래토어 보습 주사 8cc + 고농도 비타민 수액 테라피"
@@ -270,7 +276,8 @@ const BEAUTY_COURSES = [
   {
     nameKo: "프리미엄 동안 케어 (Premium Course)",
     nameEn: "Premium Youth Course",
-    price: "USD 1,230",
+    priceKo: "비용 : 별도문의",
+    priceEn: "Price: Upon Request",
     scheduleKo: [
       "1일차: 리프테라 리프팅 + 울쎄라 300샷 + 리니어펌 500샷 + 올리지오 300샷 타이트닝",
       "2일차: 포텐자 레이저 시술 + 엑소좀 아기주사 (세포 재생) + 아쿠아필 딥클렌징 + 비타민 앰플 케어"
@@ -285,7 +292,8 @@ const BEAUTY_COURSES = [
   {
     nameKo: "럭셔리 V라인 안티에이징 (Luxury Course)",
     nameEn: "Luxury Anti-Aging Course",
-    price: "USD 3,000",
+    priceKo: "비용 : 별도문의",
+    priceEn: "Price: Upon Request",
     scheduleKo: [
       "1일차: 리프테라 + 울쎄라 300샷 + 써마지 FLX 300샷 (콜라겐 원천 재생) + 리니어펌 500샷 토탈 리프팅",
       "2일차: 포텐자 + 프리미엄 엑소좀 진피 주입 + 나노 PCL 전밀 아이 주름 케어 + 명품 멀티 비타민 IV 영양 수액"
@@ -300,7 +308,8 @@ const BEAUTY_COURSES = [
   {
     nameKo: "바디 슬리밍 타이트 라인 (Body Line Course)",
     nameEn: "Body Contouring Course",
-    price: "USD 560",
+    priceKo: "비용 : 별도문의",
+    priceEn: "Price: Upon Request",
     scheduleKo: [
       "집중 전담 케어: 바디 타이트닝 보톡스 100유닛 + GPC 특수 지방분해 주사 + 울트라S 고주파 지방 연소 900샷"
     ],
@@ -733,7 +742,7 @@ export default function App() {
                           {lang === 'ko' ? item.duration : '2 Days & 1 Night'}
                         </span>
                         <span className="text-sm font-black text-rose-600">
-                          {item.price}
+                          {lang === 'ko' ? item.priceKo : item.priceEn}
                         </span>
                       </div>
                       <h4 className="font-extrabold text-neutral-800 text-base md:text-lg tracking-tight min-h-[44px]">
@@ -827,7 +836,7 @@ export default function App() {
                           {lang === 'ko' ? item.badgeKo : item.badgeEn}
                         </span>
                         <span className="text-xs md:text-sm font-black text-rose-600">
-                          {item.price}
+                          {lang === 'ko' ? item.priceKo : item.priceEn}
                         </span>
                       </div>
                       <h4 className="font-extrabold text-neutral-800 text-sm md:text-base tracking-tight min-h-[40px]">
