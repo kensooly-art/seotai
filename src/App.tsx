@@ -17,7 +17,8 @@ import cheongdamSkincare from './assets/images/cheongdam_skincare_1779418839370.
 import { TourPackage, BoardArticle, BookingInquiry, NavigationItem, FooterConfig, ThemeConfig } from './types';
 import { 
   Compass, ClipboardList, Globe2, Sparkles, Award, ShieldCheck, 
-  Map, PhoneCall, ChevronRight, Menu, X, Check, Laptop, HeartHandshake, Eye
+  Map, PhoneCall, ChevronRight, Menu, X, Check, Laptop, HeartHandshake, Eye,
+  Activity, Heart, Stethoscope
 } from 'lucide-react';
 
 // --- INITIAL SAMPLE (SEED) DATA ---
@@ -202,9 +203,119 @@ const DEFAULT_THEME: ThemeConfig = {
   seoKeywordsEn: "Seotai Travel, Korea Land Operator, Inbound VIP Protocol, Luxury Tour Korea, Custom Travel Planner"
 };
 
+const MEDICAL_PROGRAMS = [
+  {
+    nameKo: "소화기 정밀 안심 검진 (Digestive System Precision)",
+    nameEn: "Digestive System Precision Examination",
+    duration: "2 Days & 1 Night",
+    room: "Single VIP Hospital Room Included (1인 전용 병동 포함)",
+    price: "USD 1,200",
+    detailsKo: "위, 식도, 십이지장 궤양, 위암 등 정밀 안심 위 조영 촬영 및 수면 위내시경 진단 패키지.",
+    detailsEn: "Gastroscopy (Sleep type, sedation), comprehensive stomach, esophagus, duodenal ulcer, and stomach cancer screening."
+  },
+  {
+    nameKo: "심장 정밀 진단 패키지 A (Heart Precision A)",
+    nameEn: "Heart Precision Examination A",
+    duration: "2 Days & 1 Night",
+    room: "Single VIP Hospital Room Included (1인 전용 병동 포함)",
+    price: "USD 1,600",
+    detailsKo: "심장초음파, 경동맥초음파, 심혈관 석회화도 CT 촬영 등으로 허혈성 심혈관 질환 위험 조기 규격 예측.",
+    detailsEn: "Echocardiogram, Carotid ultrasound, Calcium scoring CT. Evaluate cardiovascular disease risk factor and atherosclerosis."
+  },
+  {
+    nameKo: "심장 정밀 진단 패키지 B (Heart Precision B)",
+    nameEn: "Heart Precision Examination B",
+    duration: "2 Days & 1 Night",
+    room: "Single VIP Hospital Room Included (1인 전용 병동 포함)",
+    price: "USD 2,000",
+    detailsKo: "심장 조영 CT 및 심혈관 조영술 연계. 비침습적 관상동맥 협착 및 심장 기능 정밀 판독 프로그램.",
+    detailsEn: "Cardiac CT Angiography. Non-invasive evaluation of heart & coronary artery stenosis and cardiac function."
+  },
+  {
+    nameKo: "뇌 정밀 신경 패키지 (Brain Precision)",
+    nameEn: "Brain Precision Examination",
+    duration: "2 Days & 1 Night",
+    room: "Single VIP Hospital Room Included (1인 전용 병동 포함)",
+    price: "USD 1,600",
+    detailsKo: "뇌 MRI 및 경동맥 초음파 포함. 뇌종양, 뇌경색, 뇌출혈, 알츠하이머 위험 요인의 조기 신경 정밀 진단.",
+    detailsEn: "Brain MRI, Carotid ultrasound. Diagnose/prevent brain tumor, cerebral hemorrhage, and carotid arterial diseases."
+  },
+  {
+    nameKo: "암 정밀 올인원 패키지 (Cancer/Oncology Precision)",
+    nameEn: "Cancer Precision Examination",
+    duration: "2 Days & 1 Night",
+    room: "Single VIP Hospital Room Included (1인 전용 병동 포함)",
+    price: "USD 2,000",
+    detailsKo: "수면 위/대장 내시경 검사, 복부 정밀 MRI, 핵심 종양 마커 진단으로 인체 필수 암 완벽 스크리닝.",
+    detailsEn: "Brain MRI, Gastroscopy, Sleep endoscopy, multi-screening for key oncology pathways & tumor marker checks."
+  }
+];
+
+const BEAUTY_COURSES = [
+  {
+    nameKo: "베이직 동안 쁘띠 케어 (Basic Course)",
+    nameEn: "Basic Wellness Course",
+    price: "USD 450 ~ 620",
+    scheduleKo: [
+      "1일차: 침샘/사각턱 보톡스 + 슈링크 300샷 + 인모드 FX (얼굴 윤곽 축소 시술)",
+      "2일차: 리쥬란 힐러 2cc + 플래토어 보습 주사 8cc + 고농도 비타민 수액 테라피"
+    ],
+    scheduleEn: [
+      "Day 1: Jaw/Salivary Botox + Shurink 300shots + Inmode FX lifting",
+      "Day 2: Rejuran Healer 2cc + Plator injection 8cc + Premium Vitamin IV block"
+    ],
+    badgeKo: "기본 탄력 & 주름 개선",
+    badgeEn: "Elasticity & Fine Wrinkles"
+  },
+  {
+    nameKo: "프리미엄 동안 케어 (Premium Course)",
+    nameEn: "Premium Youth Course",
+    price: "USD 1,230",
+    scheduleKo: [
+      "1일차: 리프테라 리프팅 + 울쎄라 300샷 + 리니어펌 500샷 + 올리지오 300샷 타이트닝",
+      "2일차: 포텐자 레이저 시술 + 엑소좀 아기주사 (세포 재생) + 아쿠아필 딥클렌징 + 비타민 앰플 케어"
+    ],
+    scheduleEn: [
+      "Day 1: Liftera 1site + Ulthera 300shots + Linearfirm 500shots + Oligio 300shots",
+      "Day 2: Potenza technique + Exosome skin cell booster + Aqua peel clean + Vitamin Care"
+    ],
+    badgeKo: "강력 추천 시그니처",
+    badgeEn: "Highly Recommended Signature"
+  },
+  {
+    nameKo: "럭셔리 V라인 안티에이징 (Luxury Course)",
+    nameEn: "Luxury Anti-Aging Course",
+    price: "USD 3,000",
+    scheduleKo: [
+      "1일차: 리프테라 + 울쎄라 300샷 + 써마지 FLX 300샷 (콜라겐 원천 재생) + 리니어펌 500샷 토탈 리프팅",
+      "2일차: 포텐자 + 프리미엄 엑소좀 진피 주입 + 나노 PCL 전밀 아이 주름 케어 + 명품 멀티 비타민 IV 영양 수액"
+    ],
+    scheduleEn: [
+      "Day 1: Liftera 1site + Ulthera 300shots + Thermage FLX 300shots + Linearfirm 500shots",
+      "Day 2: Potenza + Exosome regeneration + Nano PCL youth eye injection + High potency Vitamin IV"
+    ],
+    badgeKo: "최상위 토탈 하이엔드",
+    badgeEn: "Elite Total High-End"
+  },
+  {
+    nameKo: "바디 슬리밍 타이트 라인 (Body Line Course)",
+    nameEn: "Body Contouring Course",
+    price: "USD 560",
+    scheduleKo: [
+      "집중 전담 케어: 바디 타이트닝 보톡스 100유닛 + GPC 특수 지방분해 주사 + 울트라S 고주파 지방 연소 900샷"
+    ],
+    scheduleEn: [
+      "Intensive Escorted Care: Body Botox 100units + GPC fat dissolving injection + Ultra S 900shots"
+    ],
+    badgeKo: "체형 및 라인 교정",
+    badgeEn: "Safe Silhouette Sculpture"
+  }
+];
+
 export default function App() {
   // Localization toggle State
   const [lang, setLang] = useState<'ko' | 'en'>('ko');
+  const [aboutTab, setAboutTab] = useState<'why' | 'medical' | 'beauty'>('why');
   const [showAdmin, setShowAdmin] = useState<boolean>(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
 
@@ -465,79 +576,285 @@ export default function App() {
         </div>
       </section>
 
-      {/* 3. CO-LAB VALUES BANNER (Intro) */}
-      <section id="intro" className="py-12 bg-neutral-50/50 border-b border-neutral-100 py-16 shrink-0 text-neutral-800">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 space-y-12">
+      {/* 3. CO-LAB VALUES & BROCHURE SERVICES (Intro) */}
+      <section id="intro" className="py-16 bg-neutral-50/50 border-b border-neutral-100 shrink-0 text-neutral-800">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 space-y-10">
           
-          <div className="text-center space-y-2">
+          <div className="text-center space-y-4">
             <h2 className="text-2xl md:text-4xl font-extrabold text-[#761A7E]" style={{ color: theme.primaryColor }}>
-              {lang === 'ko' ? '왜 서태국제여행사인가?' : 'The Seotai Advantage'}
+              {lang === 'ko' ? '서태국제여행사 소개' : 'About Seotai Travel'}
             </h2>
-            <p className="text-xs md:text-sm text-neutral-500 max-w-lg mx-auto leading-relaxed">
+            <p className="text-xs md:text-sm text-neutral-500 max-w-2xl mx-auto leading-relaxed">
               {lang === 'ko' 
-                ? '가장 검증되고 탄탄한 자산을 소유한 한국 정식 랜드 오퍼레이터' 
-                : 'Pristine service delivery driven by direct asset oversight.'
+                ? '한국 내 유일무이한 인바운드 명품 의전부터 의료, 뷰티 협약 패키지까지 직접 조율하는 정식 랜드사입니다. 아래 탭에서 자세한 제공 내역을 확인하세요.' 
+                : 'South Korea\'s premium certified direct land operator managing custom VIP protocols, oncology medicine, and elite cosmetics programs.'
               }
             </p>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {/* Value card 1 */}
-            <div className="bg-white p-6 rounded-xl border border-neutral-100 shadow-sm transition-all hover:shadow-md hover:border-purple-100 space-y-4">
-              <div className="p-3 bg-purple-50 text-[#761A7E] rounded-md inline-block" style={{ color: theme.primaryColor, backgroundColor: `${theme.primaryColor}10` }}>
-                <Award className="w-6 h-6" />
-              </div>
-              <h3 className="font-extrabold text-neutral-900 text-lg">{lang === 'ko' ? '직영 자산과 단가 최적화' : 'Direct Asset Network'}</h3>
-              <p className="text-xs text-neutral-500 leading-relaxed">
-                {lang === 'ko'
-                  ? '무의미한 랜드 총괄 딜러 마크업을 과감히 폐지하고 직접 연동된 가이드 및 벤 수배로 수임 수수료를 30% 이상 경감합니다.'
-                  : 'By completely cutting middle-agency channels, we supply raw rates for premium shuttle vans, translation units, and group events.'
-                }
-              </p>
-            </div>
+            {/* Tab Navigation Switcher - Color coded with elegant distinct outlines and subtle colored backgrounds for maximum visual impact */}
+            <div className="flex flex-wrap justify-center gap-3 pt-6 pb-2">
+              <button
+                onClick={() => setAboutTab('why')}
+                className={`px-6 py-3 text-xs md:text-sm font-black rounded-full border transition-all duration-300 cursor-pointer whitespace-nowrap flex items-center gap-2.5 shadow-sm transform active:scale-95 ${
+                  aboutTab === 'why'
+                    ? 'bg-purple-100 border-[#761A7E] text-[#761A7E] ring-2 ring-purple-200'
+                    : 'bg-white/80 border-neutral-200 text-neutral-600 hover:bg-purple-50/50 hover:border-purple-300 hover:text-[#761A7E]'
+                }`}
+                style={{
+                  borderColor: aboutTab === 'why' ? theme.primaryColor : undefined,
+                  color: aboutTab === 'why' ? theme.primaryColor : undefined,
+                  backgroundColor: aboutTab === 'why' ? `${theme.primaryColor}15` : undefined
+                }}
+              >
+                <Award className={`w-4 h-4 md:w-5 md:h-5 ${aboutTab === 'why' ? 'text-[#761A7E]' : 'text-neutral-400 group-hover:text-[#761A7E]'}`} style={{ color: aboutTab === 'why' ? theme.primaryColor : undefined }} />
+                {lang === 'ko' ? '회사소개 및 강점' : 'About & Strengths'}
+              </button>
 
-            {/* Value card 2 */}
-            <div className="bg-white p-6 rounded-xl border border-neutral-100 shadow-sm transition-all hover:shadow-md hover:border-purple-100 space-y-4">
-              <div className="p-3 bg-purple-50 text-[#761A7E] rounded-md inline-block" style={{ color: theme.primaryColor, backgroundColor: `${theme.primaryColor}10` }}>
-                <ShieldCheck className="w-6 h-6" />
-              </div>
-              <h3 className="font-extrabold text-neutral-900 text-lg">{lang === 'ko' ? '정부 인가 의전 자격 수임' : 'Certified Vouching'}</h3>
-              <p className="text-xs text-neutral-500 leading-relaxed">
-                {lang === 'ko'
-                  ? '외교 빈객 의전 가이드 수칙을 완벽히 이행하며 안전 사고 책임 공제 및 정부 허가 종합 보증보험 가입으로 철저한 안전을 전담합니다.'
-                  : 'Fully compliant with national security protocols. Our team holds extensive insurance, guaranteeing client protection.'
-                }
-              </p>
-            </div>
+              <button
+                onClick={() => setAboutTab('medical')}
+                className={`px-6 py-3 text-xs md:text-sm font-black rounded-full border transition-all duration-300 cursor-pointer whitespace-nowrap flex items-center gap-2.5 shadow-sm transform active:scale-95 ${
+                  aboutTab === 'medical'
+                    ? 'bg-teal-100 border-teal-600 text-teal-800 ring-2 ring-teal-200'
+                    : 'bg-white/80 border-neutral-200 text-neutral-600 hover:bg-teal-50/50 hover:border-teal-300 hover:text-teal-700'
+                }`}
+              >
+                <Stethoscope className={`w-4 h-4 md:w-5 md:h-5 ${aboutTab === 'medical' ? 'text-teal-600' : 'text-neutral-400'}`} />
+                {lang === 'ko' ? 'K-메디컬 건강검진 패키지' : 'K-Medical Checkups'}
+              </button>
 
-            {/* Value card 3 */}
-            <div className="bg-white p-6 rounded-xl border border-neutral-100 shadow-sm transition-all hover:shadow-md hover:border-purple-100 space-y-4">
-              <div className="p-3 bg-purple-50 text-[#761A7E] rounded-md inline-block" style={{ color: theme.primaryColor, backgroundColor: `${theme.primaryColor}10` }}>
-                <Map className="w-6 h-6" />
-              </div>
-              <h3 className="font-extrabold text-neutral-900 text-lg">{lang === 'ko' ? '다국어 소통 마스터즈' : 'Multilingual Masters'}</h3>
-              <p className="text-xs text-neutral-500 leading-relaxed">
-                {lang === 'ko'
-                  ? '영어, 중국어, 광둥어, 태국어 전문 통역진을 가동하여 아시아 주요 인바운드 바이어 소통 리스크를 완벽 제로화로 다룹니다.'
-                  : 'Experienced native-standard linguists ensure barrier-free communications, facilitating smooth transactions.'
-                }
-              </p>
-            </div>
-
-            {/* Value card 4 */}
-            <div className="bg-white p-6 rounded-xl border border-neutral-100 shadow-sm transition-all hover:shadow-md hover:border-purple-100 space-y-4">
-              <div className="p-3 bg-purple-50 text-[#761A7E] rounded-md inline-block" style={{ color: theme.primaryColor, backgroundColor: `${theme.primaryColor}10` }}>
-                <PhoneCall className="w-6 h-6" />
-              </div>
-              <h3 className="font-extrabold text-neutral-900 text-lg">{lang === 'ko' ? '24시간 무정체 즉답 시스템' : '24/7 Operations Desk'}</h3>
-              <p className="text-xs text-neutral-500 leading-relaxed">
-                {lang === 'ko'
-                  ? '메신저 혹은 웹 포털을 통해 접수된 건은 파트너 기획 가이드라인과 융합되어 즉시 전산 가동 및 단가 확정을 지원합니다.'
-                  : 'Realtime quote analysis. Re-allocations, dining limit changes, or emergency routing updates are resolved within minutes.'
-                }
-              </p>
+              <button
+                onClick={() => setAboutTab('beauty')}
+                className={`px-6 py-3 text-xs md:text-sm font-black rounded-full border transition-all duration-300 cursor-pointer whitespace-nowrap flex items-center gap-2.5 shadow-sm transform active:scale-95 ${
+                  aboutTab === 'beauty'
+                    ? 'bg-pink-100 border-pink-600 text-pink-800 ring-2 ring-pink-200'
+                    : 'bg-white/80 border-neutral-200 text-neutral-600 hover:bg-pink-50/50 hover:border-pink-300 hover:text-pink-700'
+                }`}
+              >
+                <Sparkles className={`w-4 h-4 md:w-5 md:h-5 ${aboutTab === 'beauty' ? 'text-pink-600' : 'text-neutral-400'}`} />
+                {lang === 'ko' ? 'K-뷰티 전담 피부/미용 시술' : 'K-Beauty & Cosmetics'}
+              </button>
             </div>
           </div>
+
+          {/* Tab 1: WHY SEOTAI */}
+          {aboutTab === 'why' && (
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 animate-fadeIn">
+              {/* Value card 1 */}
+              <div className="bg-white p-6 rounded-xl border border-neutral-100 shadow-sm transition-all hover:shadow-md hover:border-purple-100 space-y-4">
+                <div className="p-3 bg-purple-50 text-[#761A7E] rounded-md inline-block" style={{ color: theme.primaryColor, backgroundColor: `${theme.primaryColor}10` }}>
+                  <Award className="w-6 h-6" />
+                </div>
+                <h3 className="font-extrabold text-neutral-900 text-lg">{lang === 'ko' ? '직영 자산과 단가 최적화' : 'Direct Asset Network'}</h3>
+                <p className="text-xs text-neutral-500 leading-relaxed text-left">
+                  {lang === 'ko'
+                    ? '무의미한 랜드 총괄 딜러 마크업을 과감히 폐지하고 직접 연동된 가이드 및 벤 수배로 수임 수수료를 30% 이상 경감합니다.'
+                    : 'By completely cutting middle-agency channels, we supply raw rates for premium shuttle vans, translation units, and group events.'
+                  }
+                </p>
+              </div>
+
+              {/* Value card 2 */}
+              <div className="bg-white p-6 rounded-xl border border-neutral-100 shadow-sm transition-all hover:shadow-md hover:border-purple-100 space-y-4">
+                <div className="p-3 bg-purple-50 text-[#761A7E] rounded-md inline-block" style={{ color: theme.primaryColor, backgroundColor: `${theme.primaryColor}10` }}>
+                  <ShieldCheck className="w-6 h-6" />
+                </div>
+                <h3 className="font-extrabold text-neutral-900 text-lg">{lang === 'ko' ? '정부 인가 의전 자격 수임' : 'Certified Vouching'}</h3>
+                <p className="text-xs text-neutral-500 leading-relaxed text-left">
+                  {lang === 'ko'
+                    ? '외교 빈객 의전 가이드 수칙을 완벽히 이행하며 안전 사고 책임 공제 및 정부 허가 종합 보증보험 가입으로 철저한 안전을 전담합니다.'
+                    : 'Fully compliant with national security protocols. Our team holds extensive insurance, guaranteeing client protection.'
+                  }
+                </p>
+              </div>
+
+              {/* Value card 3 */}
+              <div className="bg-white p-6 rounded-xl border border-neutral-100 shadow-sm transition-all hover:shadow-md hover:border-purple-100 space-y-4">
+                <div className="p-3 bg-purple-50 text-[#761A7E] rounded-md inline-block" style={{ color: theme.primaryColor, backgroundColor: `${theme.primaryColor}10` }}>
+                  <Map className="w-6 h-6" />
+                </div>
+                <h3 className="font-extrabold text-neutral-900 text-lg">{lang === 'ko' ? '다국어 소통 마스터즈' : 'Multilingual Masters'}</h3>
+                <p className="text-xs text-neutral-500 leading-relaxed text-left">
+                  {lang === 'ko'
+                    ? '영어, 중국어, 광둥어, 태국어 전문 통역진을 가동하여 아시아 주요 인바운드 바이어 소통 리스크를 완벽 제로화로 다룹니다.'
+                    : 'Experienced native-standard linguists ensure barrier-free communications, facilitating smooth transactions.'
+                  }
+                </p>
+              </div>
+
+              {/* Value card 4 */}
+              <div className="bg-white p-6 rounded-xl border border-neutral-100 shadow-sm transition-all hover:shadow-md hover:border-purple-100 space-y-4">
+                <div className="p-3 bg-purple-50 text-[#761A7E] rounded-md inline-block" style={{ color: theme.primaryColor, backgroundColor: `${theme.primaryColor}10` }}>
+                  <PhoneCall className="w-6 h-6" />
+                </div>
+                <h3 className="font-extrabold text-neutral-900 text-lg">{lang === 'ko' ? '24시간 무정체 즉답 시스템' : '24/7 Operations Desk'}</h3>
+                <p className="text-xs text-neutral-500 leading-relaxed text-left">
+                  {lang === 'ko'
+                    ? '메신저 혹은 웹 포털을 통해 접수된 건은 파트너 기획 가이드라인과 융합되어 즉시 전산 가동 및 단가 확정을 지원합니다.'
+                    : 'Realtime quote analysis. Re-allocations, dining limit changes, or emergency routing updates are resolved within minutes.'
+                  }
+                </p>
+              </div>
+            </div>
+          )}
+
+          {/* Tab 2: MEDICAL PROGRAMS */}
+          {aboutTab === 'medical' && (
+            <div className="space-y-8 animate-fadeIn">
+              {/* Highlight Partner Banner */}
+              <div className="bg-white p-6 rounded-2xl border border-purple-100 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
+                <div className="space-y-2 text-left">
+                  <span className="px-3 py-1 text-[10px] md:text-xs font-bold text-[#761A7E] rounded-full inline-block" style={{ color: theme.primaryColor, backgroundColor: `${theme.primaryColor}10` }}>
+                    {lang === 'ko' ? '서태 정전 협력 MOU 독점가' : 'Official Partner Co-Lab Exclusive Direct Rates'}
+                  </span>
+                  <h3 className="text-lg md:text-xl font-black text-[#761A7E]" style={{ color: theme.primaryColor }}>
+                    {lang === 'ko' ? 'KOREA MEDICAL 종합 정밀 안전 검진 센터' : 'Korea Premier Medical Precision Diagnostics'}
+                  </h3>
+                  <p className="text-xs text-neutral-500 max-w-3xl leading-relaxed">
+                    {lang === 'ko'
+                      ? '서태국제여행사는 보건복지부 인가 정식 외국인 의료 관광 유치기관으로서 더 자인병원(THE JAIN HOSPITAL), 디자인병원 등 주요 거점 권역 병원을 통해 한국 최고 수준의 정밀 종합 검진 패키지를 독점 연계 제공합니다.'
+                      : 'Seotai is a federally authorized medical tourism operator. We partner directly with premium centers including THE JAIN HOSPITAL, ensuring fully escorted executive screening.'
+                    }
+                  </p>
+                </div>
+                <div className="bg-neutral-50 p-4 rounded-xl border border-neutral-100/60 text-center md:text-right shrink-0 min-w-[200px] w-full md:w-auto">
+                  <span className="text-[10px] font-mono font-bold text-neutral-400 uppercase block tracking-wider">{lang === 'ko' ? '서태 패키지 혜택' : 'Seotai Exclusive Bonus'}</span>
+                  <span className="text-xs md:text-sm font-bold text-neutral-800 block mt-1">{lang === 'ko' ? '왕복 공항 리무진 픽업 무상 제공' : 'Roundtrip Luxury Limousine Included'}</span>
+                  <span className="text-[10px] text-neutral-400 block mt-0.5">{lang === 'ko' ? '인천/김포공항 <> 서울 숙소' : 'Incheon Airport <> Seoul Hotel Escorting'}</span>
+                </div>
+              </div>
+
+              {/* Programs Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {MEDICAL_PROGRAMS.map((item, idx) => (
+                  <div key={idx} className="bg-white p-6 rounded-xl border border-neutral-100 shadow-sm hover:shadow-md transition-all space-y-4 flex flex-col justify-between text-left">
+                    <div className="space-y-3">
+                      <div className="flex justify-between items-start gap-2">
+                        <span className="px-2.5 py-0.5 bg-neutral-100 text-[10px] text-neutral-600 font-bold rounded-md block">
+                          {lang === 'ko' ? item.duration : '2 Days & 1 Night'}
+                        </span>
+                        <span className="text-sm font-black text-rose-600">
+                          {item.price}
+                        </span>
+                      </div>
+                      <h4 className="font-extrabold text-neutral-800 text-base md:text-lg tracking-tight min-h-[44px]">
+                        {lang === 'ko' ? item.nameKo : item.nameEn}
+                      </h4>
+                      <div className="text-[10px] text-neutral-400 font-bold font-mono">
+                        {lang === 'ko' ? item.room : item.room}
+                      </div>
+                      <p className="text-xs text-neutral-500 leading-relaxed pt-2 border-t border-neutral-50 min-h-[60px]">
+                        {lang === 'ko' ? item.detailsKo : item.detailsEn}
+                      </p>
+                    </div>
+                    <button 
+                      onClick={() => handleQuickBook(`Medical Inquiry - ${lang === 'ko' ? item.nameKo : item.nameEn}`)}
+                      className="w-full mt-4 py-2 bg-neutral-900 text-white rounded-lg text-xs font-bold hover:bg-neutral-800 transition-colors uppercase tracking-widest flex items-center justify-center gap-1 cursor-pointer border-0"
+                    >
+                      {lang === 'ko' ? '실시간 검진 문의' : 'Inquire Booking'}
+                      <ChevronRight className="w-3 h-3" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Tab 3: BEAUTY SPECIALIST */}
+          {aboutTab === 'beauty' && (
+            <div className="space-y-8 animate-fadeIn text-left">
+              {/* Highlight Partner Banner */}
+              <div className="bg-white p-6 rounded-2xl border border-purple-100 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
+                <div className="space-y-2">
+                  <span className="px-3 py-1 bg-yellow-50 text-xs font-bold text-[#CBAF00] rounded-full border border-yellow-200 inline-block" style={{ color: theme.secondaryColor, backgroundColor: `${theme.secondaryColor}10` }}>
+                    {lang === 'ko' ? '한국 NO.1 피부과 프랜차이즈 연동' : 'Premium K-Beauty Medical Aesthetics Partnership'}
+                  </span>
+                  <h3 className="text-base md:text-xl font-black text-[#761A7E]" style={{ color: theme.primaryColor }}>
+                    {lang === 'ko' ? 'K-BEAUTY 프리미엄 동안 피부 정량 클리닉' : 'VIP K-Beauty Custom Skin & Body Programs'}
+                  </h3>
+                  <p className="text-xs text-neutral-500 max-w-3xl leading-relaxed">
+                    {lang === 'ko'
+                      ? '바이오페이스 클리닉(BIOFACE CLINIC) 6대 대형 네트워크 정밀 연공 계약. 불법 복제 팁/약재 사용을 일절 거부하고 정량, 정품 승인 원칙을 고수합니다. 개인 맞춤 쁘띠 성형부터 피부 안티에이징 기술까지 실시간 연동해 드립니다.'
+                      : 'Cooperating directly with BIOFACE CLINIC major offline medical beauty frameworks. High-performance micro-current, pure exosome boosters, and certified wrinkle therapies with direct guide assistance.'
+                    }
+                  </p>
+                </div>
+                <div className="bg-neutral-50 p-4 rounded-xl border border-neutral-100/60 text-center md:text-right shrink-0 min-w-[200px] w-full md:w-auto">
+                  <span className="text-[10px] font-mono font-bold text-neutral-400 uppercase block tracking-wider">{lang === 'ko' ? '서태 단독 에스코트 프로모션' : 'Seotai Direct Care'}</span>
+                  <span className="text-xs md:text-sm font-bold text-[#761A7E] block mt-1" style={{ color: theme.primaryColor }}>{lang === 'ko' ? '리무진 이송 + 전담 통역 코디 연동' : 'VIP Limousine + Dedicated Bilingual Guide'}</span>
+                  <span className="text-[10px] text-neutral-400 block mt-0.5">{lang === 'ko' ? '시술 중 소통 및 불찰 전면 예방' : 'Zero Communication Risk Guarantee'}</span>
+                </div>
+              </div>
+
+              {/* Anatomy target guidelines from bioface */}
+              <div className="bg-white p-6 rounded-xl border border-neutral-100 shadow-sm grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div className="md:col-span-1 space-y-2 border-r border-neutral-100 pr-4">
+                  <h4 className="text-sm font-black text-neutral-800 uppercase tracking-wider">{lang === 'ko' ? '침샘 보톡스 집중 수술 부위' : 'Certified Salivary Gland Target'}</h4>
+                  <p className="text-[11px] text-neutral-400 leading-relaxed md:block hidden">
+                    {lang === 'ko'
+                      ? '과도하게 팽창된 귀밑샘, 턱밑샘 침샘을 조절하고 이중턱 양끝을 타이트하게 연동시켜 슬림하고 세련된 페이스라인 윤곽을 연출 조율합니다.'
+                      : 'Precisely shrinks salivary gland volumes resulting in instant double chin contouring.'
+                    }
+                  </p>
+                </div>
+                <div className="md:col-span-3 grid grid-cols-2 md:grid-cols-3 gap-3">
+                  {[
+                    { titleKo: "귀밑 침샘", titleEn: "Sub-ear Salivary Gland", descKo: "턱 밑 양끝 외측을 줄여 턱선 복원", descEn: "Slimming from jaw muscle to back of ear" },
+                    { titleKo: "턱밑 침샘", titleEn: "Under-ear Salivary Gland", descKo: "이중턱 라인의 볼록한 부위 처짐 해결", descEn: "Resolve lateral double chin swell" },
+                    { titleKo: "저작근 사각턱", titleEn: "Jaw Muscle (Square Jaw)", descKo: "과도한 턱 근육 대칭 축소 슬리밍", descEn: "Jaw muscle slimming & contour" },
+                    { titleKo: "심부볼 파괴", titleEn: "Deep Cheek Fat Reduction", descKo: "볼살 제거 및 리프팅 연동 윤곽 확보", descEn: "Slimming cheeks & contour injection effect" },
+                    { titleKo: "이중턱 V-라인", titleEn: "Double Chin V-Line", descKo: "처진 연부 조직 수렴 탄력 최고 보강", descEn: "Lifting double chin elasticity" },
+                    { titleKo: "종합 전문 레이저", titleEn: "Specialized Laser Treatment", descKo: "토닝, 클라리티, 제네시스, 피코듀오", descEn: "Pico, Potenza, Exosome skin barrier glow" }
+                  ].map((item, idx) => (
+                    <div key={idx} className="bg-neutral-50/50 p-2.5 rounded-lg border border-neutral-100 space-y-1">
+                      <span className="text-xs font-extrabold text-[#761A7E] block" style={{ color: theme.primaryColor }}>
+                        {lang === 'ko' ? item.titleKo : item.titleEn}
+                      </span>
+                      <span className="text-[10px] text-neutral-500 block leading-tight">
+                        {lang === 'ko' ? item.descKo : item.descEn}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Beauty Packages Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                {BEAUTY_COURSES.map((item, idx) => (
+                  <div key={idx} className="bg-white p-6 rounded-xl border border-neutral-100 shadow-sm hover:shadow-md transition-all space-y-4 flex flex-col justify-between">
+                    <div className="space-y-3">
+                      <div className="flex justify-between items-start gap-2">
+                        <span className="px-2 py-0.5 bg-yellow-50 text-[10px] text-[#CBAF00] font-bold rounded" style={{ color: theme.secondaryColor, backgroundColor: `${theme.secondaryColor}15` }}>
+                          {lang === 'ko' ? item.badgeKo : item.badgeEn}
+                        </span>
+                        <span className="text-xs md:text-sm font-black text-rose-600">
+                          {item.price}
+                        </span>
+                      </div>
+                      <h4 className="font-extrabold text-neutral-800 text-sm md:text-base tracking-tight min-h-[40px]">
+                        {lang === 'ko' ? item.nameKo : item.nameEn}
+                      </h4>
+                      
+                      <div className="space-y-3 pt-2 border-t border-neutral-50 text-xs text-neutral-500 leading-relaxed">
+                        {(lang === 'ko' ? item.scheduleKo : item.scheduleEn).map((day, dIdx) => (
+                          <div key={dIdx} className="flex gap-1.5 items-start text-[11px] leading-relaxed">
+                            <span className="text-[#CBAF00] font-bold shrink-0" style={{ color: theme.secondaryColor }}>✓</span>
+                            <span>{day}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <button 
+                      onClick={() => handleQuickBook(`K-Beauty Inquiry - ${lang === 'ko' ? item.nameKo : item.nameEn}`)}
+                      className="w-full mt-4 py-2 bg-neutral-900 hover:bg-neutral-800 text-white rounded-lg text-xs font-bold transition-colors uppercase tracking-widest flex items-center justify-center gap-1 cursor-pointer border-0"
+                    >
+                      {lang === 'ko' ? '정밀 패키지 상담' : 'Consult Schedule'}
+                      <ChevronRight className="w-3 h-3" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
         </div>
       </section>
