@@ -531,11 +531,74 @@ export default function AdminDashboard({
                   />
                 </div>
                 <div className="col-span-1 md:col-span-2">
-                  <label className="text-xs font-semibold text-neutral-500">본사 주소 (국문)</label>
+                  <label className="text-xs font-semibold text-neutral-500">본사 주소 (국문 / 영문)</label>
                   <input
                     type="text"
                     value={draftFooter.addressKo}
-                    onChange={(e) => setDraftFooter({ ...draftFooter, addressKo: e.target.value })}
+                    onChange={(e) => setDraftFooter({ ...draftFooter, addressKo: e.target.value, addressEn: e.target.value })}
+                    className="w-full px-3 py-2 bg-white border border-neutral-200 rounded text-xs mt-1"
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-semibold text-neutral-500">FAX 번호</label>
+                  <input
+                    type="text"
+                    value={draftFooter.fax || ''}
+                    onChange={(e) => setDraftFooter({ ...draftFooter, fax: e.target.value })}
+                    className="w-full px-3 py-2 bg-white border border-neutral-200 rounded text-xs mt-1"
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-semibold text-neutral-500">Skype ID/URL</label>
+                  <input
+                    type="text"
+                    value={draftFooter.skype || ''}
+                    onChange={(e) => setDraftFooter({ ...draftFooter, skype: e.target.value })}
+                    className="w-full px-3 py-2 bg-white border border-neutral-200 rounded text-xs mt-1"
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-semibold text-neutral-500">LINE ID</label>
+                  <input
+                    type="text"
+                    value={draftFooter.lineId || ''}
+                    onChange={(e) => setDraftFooter({ ...draftFooter, lineId: e.target.value })}
+                    className="w-full px-3 py-2 bg-white border border-neutral-200 rounded text-xs mt-1"
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-semibold text-neutral-500">Kakao ID/Email</label>
+                  <input
+                    type="text"
+                    value={draftFooter.kakaoAccount || ''}
+                    onChange={(e) => setDraftFooter({ ...draftFooter, kakaoAccount: e.target.value })}
+                    className="w-full px-3 py-2 bg-white border border-neutral-200 rounded text-xs mt-1"
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-semibold text-neutral-500">Wechat ID</label>
+                  <input
+                    type="text"
+                    value={draftFooter.wechatId || ''}
+                    onChange={(e) => setDraftFooter({ ...draftFooter, wechatId: e.target.value })}
+                    className="w-full px-3 py-2 bg-white border border-neutral-200 rounded text-xs mt-1"
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-semibold text-neutral-500">Mobile Phone / Messenger (WhatsApp, Viber)</label>
+                  <input
+                    type="text"
+                    value={draftFooter.mobilePhone || ''}
+                    onChange={(e) => setDraftFooter({ ...draftFooter, mobilePhone: e.target.value })}
+                    className="w-full px-3 py-2 bg-white border border-neutral-200 rounded text-xs mt-1"
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-semibold text-neutral-500">Official Website URL</label>
+                  <input
+                    type="text"
+                    value={draftFooter.website || ''}
+                    onChange={(e) => setDraftFooter({ ...draftFooter, website: e.target.value })}
                     className="w-full px-3 py-2 bg-white border border-neutral-200 rounded text-xs mt-1"
                   />
                 </div>

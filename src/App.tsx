@@ -167,19 +167,25 @@ const DEFAULT_NAV: NavigationItem[] = [
 ];
 
 const DEFAULT_FOOTER: FooterConfig = {
-  companyNameKo: "(주) 서태국제여행사",
-  companyNameEn: "Seotai International Travel Co., Ltd.",
-  ceoKo: "대표자: 서태인",
-  ceoEn: "CEO: Seotai In",
-  registrationNumber: "사업자등록번호: 124-81-90382 [랜드사 정식 제2015-12호]",
-  addressKo: "본사: 서울특별시 중구 세종대로 110 (태평로1가, 서울시청 타워 8층)",
-  addressEn: "Headquarters: 8F, Sejong-daero 110, Jung-gu, Seoul, Republic of Korea",
-  telephone: "대표전화: +82-2-1234-5678",
-  fax: "FAX: +82-2-1234-5679",
-  email: "이메일: travel@seotai-land.com",
+  companyNameKo: "Korea Office",
+  companyNameEn: "Korea Office",
+  ceoKo: "Line ID : palaphonkim, Kakao Account : ksh5313@msn.com, Wechat ID : palaphonkim",
+  ceoEn: "Line ID : palaphonkim, Kakao Account : ksh5313@msn.com, Wechat ID : palaphonkim",
+  registrationNumber: "Mobile Phone Number:  +82-10-8943-5311 (Whatsapp, Viber)",
+  addressKo: "18, World Cup buk-ro 23-gil, Mapo-gu, Seoul, Korea",
+  addressEn: "18, World Cup buk-ro 23-gil, Mapo-gu, Seoul, Korea",
+  telephone: "Tel: +82-2-333-7654",
+  fax: "Fax: +82-2-3337654",
+  email: "Email : korea2@seotaitravel.com",
   socialFacebook: "https://facebook.com/seotaitravel",
   socialInstagram: "https://instagram.com/seotaitravel",
-  socialTwitter: "https://twitter.com/seotaitravel"
+  socialTwitter: "https://twitter.com/seotaitravel",
+  skype: "Skype: sunbesttour_kr@hotmail.com",
+  lineId: "palaphonkim",
+  kakaoAccount: "ksh5313@msn.com",
+  wechatId: "palaphonkim",
+  mobilePhone: " +82-10-8943-5311 (Whatsapp, Viber)",
+  website: "www.seotaitravel.com"
 };
 
 const DEFAULT_THEME: ThemeConfig = {
@@ -257,7 +263,22 @@ export default function App() {
 
   const [footer, setFooter] = useState<FooterConfig>(() => {
     const cached = localStorage.getItem('seotai_footer');
-    return cached ? JSON.parse(cached) : DEFAULT_FOOTER;
+    if (cached) {
+      try {
+        const parsed = JSON.parse(cached) as FooterConfig;
+        if (
+          parsed.companyNameKo === "(주) 서태국제여행사" ||
+          parsed.telephone?.includes("1234") ||
+          !parsed.skype
+        ) {
+          return DEFAULT_FOOTER;
+        }
+        return parsed;
+      } catch (e) {
+        return DEFAULT_FOOTER;
+      }
+    }
+    return DEFAULT_FOOTER;
   });
 
   const [theme, setTheme] = useState<ThemeConfig>(() => {
@@ -687,23 +708,60 @@ export default function App() {
           </div>
 
           {/* Corporate specifications */}
-          <div className="md:col-span-5 space-y-4">
+          <div className="md:col-span-12 lg:col-span-5 space-y-4">
             <h4 className="font-extrabold text-white text-sm tracking-widest uppercase border-l-2 pl-2" style={{ borderColor: theme.secondaryColor }}>
-              {lang === 'ko' ? '법인 허가 정보' : 'Corporate Disclosures'}
+              {lang === 'ko' ? '회사 정보 (Korea Office)' : 'Korea Office Details'}
             </h4>
             
-            <div className="space-y-1.5 text-neutral-500 text-xs font-sans">
-              <p className="font-bold text-neutral-300">
-                {lang === 'ko' ? footer.companyNameKo : footer.companyNameEn}
+            <div className="space-y-2 text-neutral-400 text-xs font-sans leading-relaxed">
+              <div className="text-sm font-black text-white flex items-center gap-1.5">
+                <span>{lang === 'ko' ? footer.companyNameKo : footer.companyNameEn}</span>
+              </div>
+              <p className="text-neutral-300 font-medium">
+                {lang === 'ko' ? footer.addressKo : footer.addressEn}
               </p>
-              <p>{lang === 'ko' ? footer.ceoKo : footer.ceoEn}</p>
-              <p>{footer.registrationNumber}</p>
-              <p>{lang === 'ko' ? footer.addressKo : footer.addressEn}</p>
               
-              <div className="grid grid-cols-2 gap-1 pt-1 border-t border-neutral-900 mt-2 text-neutral-400">
-                <p>{footer.telephone}</p>
-                <p>{footer.fax}</p>
-                <p className="col-span-2">{footer.email}</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1 pt-1.5 mt-2 border-t border-neutral-900 text-neutral-400">
+                <p>
+                  <span className="font-semibold text-neutral-500">Tel:</span> {footer.telephone.replace("Tel: ", "").replace("대표전화: ", "")}
+                </p>
+                <p>
+                  <span className="font-semibold text-neutral-500">Fax:</span> {footer.fax?.replace("Fax: ", "").replace("FAX: ", "")}
+                </p>
+                {footer.skype && (
+                  <p className="sm:col-span-2">
+                    <span className="font-semibold text-neutral-500">Skype:</span> <span className="text-neutral-300">{footer.skype.replace("Skype: ", "")}</span>
+                  </p>
+                )}
+              </div>
+
+              <div className="pt-2 border-t border-neutral-900 mt-2 space-y-1.5">
+                <div className="bg-neutral-900/50 p-2 rounded-lg border border-neutral-800/60 leading-relaxed text-[11px] space-y-1">
+                  <p className="font-semibold text-[#CBAF00] uppercase tracking-wider">Instant Messenger IDs:</p>
+                  <p className="text-neutral-400">
+                    <span className="font-semibold text-neutral-300">Line ID:</span> {footer.lineId || "palaphonkim"}
+                    <span className="mx-1.5 text-neutral-800">|</span> 
+                    <span className="font-semibold text-neutral-300">Kakao:</span> {footer.kakaoAccount || "ksh5313@msn.com"}
+                    <span className="mx-1.5 text-neutral-800">|</span> 
+                    <span className="font-semibold text-neutral-300">Wechat ID:</span> {footer.wechatId || "palaphonkim"}
+                  </p>
+                  <p className="text-neutral-400 pt-1 border-t border-neutral-900">
+                    <span className="font-semibold text-neutral-300">Mobile Phone:</span> {footer.mobilePhone?.replace("Mobile Phone Number:", "") || " +82-10-8943-5311 (Whatsapp, Viber)"}
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-1 pt-1 text-[11px]">
+                  <p>
+                    <span className="font-semibold text-neutral-500">Website:</span>{" "}
+                    <a href={`http://${footer.website || "www.seotaitravel.com"}`} target="_blank" rel="noopener noreferrer" className="hover:underline text-neutral-200">
+                      {footer.website || "www.seotaitravel.com"}
+                    </a>
+                  </p>
+                  <p>
+                    <span className="font-semibold text-neutral-500">Email:</span>{" "}
+                    <span className="text-neutral-200">{footer.email.replace("Email : ", "").replace("Email: ", "").replace("이메일: ", "")}</span>
+                  </p>
+                </div>
               </div>
             </div>
           </div>

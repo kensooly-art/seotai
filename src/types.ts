@@ -64,6 +64,12 @@ export interface FooterConfig {
   socialFacebook: string;
   socialInstagram: string;
   socialTwitter: string;
+  skype?: string;
+  lineId?: string;
+  kakaoAccount?: string;
+  wechatId?: string;
+  mobilePhone?: string;
+  website?: string;
 }
 
 export interface ThemeConfig {
