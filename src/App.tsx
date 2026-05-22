@@ -364,34 +364,14 @@ export default function App() {
             {/* Language Switch */}
             <button
               onClick={() => setLang(lang === 'ko' ? 'en' : 'ko')}
-              className="px-3 py-1.5 rounded-lg border border-neutral-200 hover:bg-neutral-50 text-[11px] md:text-xs font-black tracking-wider flex items-center gap-2 transition-all cursor-pointer"
+              className="px-3 py-1.5 rounded-lg border border-neutral-200 hover:bg-neutral-50 text-[11px] md:text-xs font-black tracking-wider flex items-center gap-1.5 transition-all cursor-pointer"
             >
               <Globe2 className="w-3.5 h-3.5" style={{ color: theme.primaryColor }} />
-              <div className="flex items-center gap-1">
-                <span className="transition-colors duration-200" style={{ color: lang === 'ko' ? theme.primaryColor : '#737373', fontWeight: lang === 'ko' ? '900' : '500' }}>KO</span>
-                <span className="text-neutral-300">|</span>
-                <span className="transition-colors duration-200" style={{ color: lang === 'en' ? theme.primaryColor : '#737373', fontWeight: lang === 'en' ? '900' : '500' }}>EN</span>
-              </div>
+              <span className="transition-colors duration-200 text-neutral-800" style={{ color: theme.primaryColor }}>
+                {lang === 'ko' ? 'English' : '한국어'}
+              </span>
             </button>
 
-            {/* Admin toggle Button */}
-            <button
-              onClick={() => {
-                setShowAdmin(!showAdmin);
-                if (!showAdmin) {
-                  window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-                }
-              }}
-              className="px-3 py-1.5 rounded-lg text-[11px] md:text-xs font-black tracking-wider flex items-center gap-1 transition-all shadow-sm"
-              style={{
-                backgroundColor: showAdmin ? `${theme.primaryColor}20` : theme.primaryColor,
-                color: showAdmin ? theme.primaryColor : '#ffffff',
-                border: showAdmin ? `1px solid ${theme.primaryColor}40` : 'none'
-              }}
-            >
-              <Laptop className="w-3.5 h-3.5" />
-              {showAdmin ? (lang === 'ko' ? '기획오피스 ' : 'Exit Office') : (lang === 'ko' ? '관리자 대시보드' : 'Admin Panel')}
-            </button>
 
             {/* Mobile menu trigger */}
             <button
@@ -680,6 +660,29 @@ export default function App() {
                   </button>
                 </li>
               ))}
+              <li>
+                <button 
+                  onClick={() => {
+                    setShowAdmin(!showAdmin);
+                    if (!showAdmin) {
+                      setTimeout(() => {
+                        const adminEl = document.getElementById('admin');
+                        if (adminEl) {
+                          adminEl.scrollIntoView({ behavior: 'smooth' });
+                        } else {
+                          window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+                        }
+                      }, 100);
+                    }
+                  }}
+                  className="transition-colors cursor-pointer text-neutral-400 text-left w-full"
+                  onMouseEnter={(e) => e.currentTarget.style.color = theme.secondaryColor}
+                  onMouseLeave={(e) => e.currentTarget.style.color = '#a3a3a3'}
+                  style={{ color: showAdmin ? theme.secondaryColor : undefined }}
+                >
+                  • {lang === 'ko' ? '관리자 대시보드 (오피스)' : 'Admin Dashboard'}
+                </button>
+              </li>
             </ul>
           </div>
 
@@ -713,6 +716,26 @@ export default function App() {
             <a href="#hero" className="hover:underline">{lang === 'ko' ? '이용 약관' : 'Terms of Service'}</a>
             <span>|</span>
             <a href="#hero" className="hover:underline">{lang === 'ko' ? '개인정보 처리방침' : 'Privacy Statement'}</a>
+            <span>|</span>
+            <button
+              onClick={() => {
+                setShowAdmin(!showAdmin);
+                if (!showAdmin) {
+                  setTimeout(() => {
+                    const adminEl = document.getElementById('admin');
+                    if (adminEl) {
+                      adminEl.scrollIntoView({ behavior: 'smooth' });
+                    } else {
+                      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+                    }
+                  }, 100);
+                }
+              }}
+              className="hover:underline cursor-pointer text-neutral-500 hover:text-neutral-300 transition-colors"
+              style={{ color: showAdmin ? theme.secondaryColor : undefined }}
+            >
+              {lang === 'ko' ? '관리자 대시보드' : 'Admin Dashboard'}
+            </button>
           </div>
         </div>
       </footer>
