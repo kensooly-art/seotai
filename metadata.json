@@ -1,0 +1,6 @@
+{
+  "name": "Seotai International Travel",
+  "description": "서태국제여행사 (Seotai Travel) - Premium travel agency platform with a highly interactive Admin Panel, dynamic bilingual translation (KO/EN), real-time content editor, and customizable premium theme controls.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
